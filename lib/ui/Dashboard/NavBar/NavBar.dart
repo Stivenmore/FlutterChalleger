@@ -8,39 +8,49 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  bool state = false;
   double miniheight = 80;
-  double miniwidth = 150;
+  double miniwidth = 170;
   double dy, dx;
-
-      verticalupdate(details){
-            print('Update');
-        print(details.localPosition);
-        print('dy ' + '${details.localPosition.dy / 100}');
-        print('dx ' + '${details.localPosition.dx / 100}');
-         dy = (details.localPosition.dy / 100) * 10;
-         dx = (details.localPosition.dx / 100) * 10;
-        setState(() {
-          if (dy < 80 && dx < 120) {
-            miniheight = dy;
-            miniwidth = dx;
-          } else {
-            miniwidth = 150;
-            miniheight = 80;
-          }
-        });
-      }
-      expandedtap(size){
-        setState(() {
-          miniheight = size.height / 2;
-          miniwidth = size.width;
-        });
+  verticalEnd(details) {
+    setState(() {
+      miniheight = 80;
+      miniwidth = 170;
+    });
+     print(miniheight);
   }
+
+  verticalupdate(details, size) {
+    dy = (details.localPosition.dy / 100);
+    setState(() {});
+    if (miniheight > 80) {
+      setState(() {});
+      miniheight = miniheight - (dy * 0.5);
+      miniwidth = miniwidth - 2;
+      setState(() {});
+       print(miniheight);
+    } else {
+      miniheight = 80;
+      miniwidth = 170;
+    }
+  }
+
+  expandedtap(size) {
+    setState(() {
+      miniheight = size.height / 2;
+      miniwidth = size.width;
+    });
+    print(miniheight);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onVerticalDragUpdate: (DragUpdateDetails details) => verticalupdate(details),
+      onVerticalDragUpdate: (DragUpdateDetails details) =>
+          verticalupdate(details, size),
+      onVerticalDragEnd: (DragEndDetails details) => verticalEnd(
+        details,
+      ),
       onTap: () => expandedtap(size),
       child: AnimatedPadding(
         duration: Duration(milliseconds: 700),
@@ -49,23 +59,32 @@ class _NavBarState extends State<NavBar> {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 1200),
-            curve: state ? Curves.linear : Curves.elasticInOut,
+            duration: Duration(milliseconds: miniheight < size.height / 2? 0 : 1000),
+            curve: Curves.elasticInOut,
             height: miniheight,
             width: miniwidth,
-            constraints: BoxConstraints(
-              minHeight: 80,
-              minWidth: 150,
-              maxHeight: size.height/2,
-              maxWidth: size.width
-            ),
             decoration: BoxDecoration(
                 borderRadius: miniheight < size.height / 2
                     ? BorderRadius.circular(24)
                     : BorderRadius.only(
                         topLeft: Radius.circular(46),
                         topRight: Radius.circular(46)),
-                color: Colors.black),
+                color: Color(0xff5B00C5)),
+            child: miniheight == 80
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(Icons.all_inclusive_rounded, color: Colors.white),
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/albums/img3.png'),
+                      ),
+                      CircleAvatar(
+                        radius: 14,
+                        backgroundImage: AssetImage('assets/avatar/avatar.png'),
+                      ),
+                    ],
+                  )
+                : Column(),
           ),
         ),
       ),
