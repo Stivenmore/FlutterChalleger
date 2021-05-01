@@ -23,13 +23,13 @@ List<Albums> albums = [
 
 class Artists {
   final String path;
-
-  Artists({this.path});
+  final String name;
+  Artists({this.name, this.path});
 }
 
 List<Artists> artists = [
-  Artists(path: 'assets/persons/person1.png'),
-  Artists(path: 'assets/persons/person2.png'),
-  Artists(path: 'assets/persons/person3.png'),
-  Artists(path: 'assets/persons/person4.png')
+  Artists(path: 'assets/persons/person1.png', name: 'Alonso MP'),
+  Artists(path: 'assets/persons/person2.png', name: ' NOAH'),
+  Artists(path: 'assets/persons/person3.png', name: 'Alan Wal'),
+  Artists(path: 'assets/persons/person4.png', name: 'Eminen')
 ];

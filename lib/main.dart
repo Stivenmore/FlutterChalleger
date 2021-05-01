@@ -1,4 +1,5 @@
 import 'package:challenger_02_05_2021/ui/Dashboard/Dashboard.dart';
+import 'package:challenger_02_05_2021/ui/Splash/SplashScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -6,18 +7,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Challenger',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        accentColor: Colors.white
       ),
-      home: Dashboard(
-
-      )
+      home: SplasScreen()
     );
   }
 }

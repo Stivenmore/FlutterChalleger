@@ -53,14 +53,14 @@ class _NavBarState extends State<NavBar> {
       ),
       onTap: () => expandedtap(size),
       child: AnimatedPadding(
-        duration: Duration(milliseconds: 700),
+        duration: Duration(milliseconds: 800),
         padding:
-            EdgeInsets.only(bottom: (miniheight < size.height / 2) ? 10 : 0),
+            EdgeInsets.only(bottom: (miniheight < size.height / 2) ? 30 : 0),
         child: Align(
           alignment: Alignment.bottomCenter,
           child: AnimatedContainer(
             duration: Duration(milliseconds: miniheight < size.height / 2? 0 : 1000),
-            curve: Curves.elasticInOut,
+            curve: miniheight < size.height / 2? Curves.bounceIn: Curves.elasticInOut,
             height: miniheight,
             width: miniwidth,
             decoration: BoxDecoration(
