@@ -11,11 +11,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Scaffold(
+      body: Stack(
       children: [Home(), NavBar()],
+    ),
     );
   }
 }
