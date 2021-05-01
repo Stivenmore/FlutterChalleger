@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
           height: size.height,
           width: size.width,
           child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
