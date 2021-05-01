@@ -77,121 +77,146 @@ class _NavBarState extends State<NavBar> {
                         topRight: Radius.circular(46)),
                 color: Color(0xff5B00C5)),
             child: miniheight < 85
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Icon(Icons.all_inclusive_rounded, color: Colors.white),
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/albums/img3.png'),
-                      ),
-                      CircleAvatar(
-                        radius: 14,
-                        backgroundImage: AssetImage('assets/avatar/avatar.png'),
-                      ),
-                    ],
-                  )
-                : SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          height: 130,
-                          width: 120,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/albums/img2.png'),
-                                  fit: BoxFit.cover)),
-                        ),
-                        Container(
-                          height: 5,
-                          width: 90,
-                          decoration: BoxDecoration(
-                              color: Color(0xff5A0095),
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(32),
-                                bottomRight: Radius.circular(32),
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Text('Bloody Teor',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        Stack(
-                          children: [
-                             Center(
-                               child: ImageFiltered(
-                                    imageFilter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
-                                    child: Opacity(
-                                      opacity: 0.5,
-                                      child: Container(
-                                        width: size.width,
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.topRight,
-                                                colors: [
-                                                  Color(0xff5A0095),
-                                              Color(0xffAE52FF),
-                                              Color(0xff4C65F6),
-                                              Color(0xff4C65F6),
-                                              Color(0xff3981E9),
-                                              Color(0xffAE52FF),
-                                              Color(0xff5A0095)
-                                            ]   )),
-                                      ),
-                                    ),
-                                  ),
-                               
-                             ),
-                            Center(
-                              child: ImageFiltered(
-                                imageFilter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 2),
-                                child: Container(
-                                  height:65,
-                                  width: 3,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffBBF1ED)
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height:50,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(CupertinoIcons.bluetooth, color: Colors.white, size: 32,),
-                             Icon(CupertinoIcons.pause, color: Colors.white, size: 32,),
-                              Icon(CupertinoIcons.chevron_right_2, color: Colors.white, size: 32,),
-                          ],
-                        ),
-                        const SizedBox(height:50,),
-                       Container(
-                            height: 4,
-                            width:150,
-                            decoration: BoxDecoration(
-                              color: Colors.white
-                            )
-                          ),
-                      ],
-                    ),
-                  ),
+                ? NavCloset()
+                : NavOpen(size: size),
           ),
         ),
       ),
     );
+  }
+}
+
+class NavCloset extends StatelessWidget {
+  const NavCloset({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(Icons.all_inclusive_rounded, color: Colors.white),
+          CircleAvatar(
+            backgroundImage: AssetImage('assets/albums/img3.png'),
+          ),
+          CircleAvatar(
+            radius: 14,
+            backgroundImage: AssetImage('assets/avatar/avatar.png'),
+          ),
+        ],
+      );
+  }
+}
+
+class NavOpen extends StatelessWidget {
+  const NavOpen({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 130,
+              width: 120,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                      image: AssetImage('assets/albums/img2.png'),
+                      fit: BoxFit.cover)),
+            ),
+            Container(
+              height: 5,
+              width: 90,
+              decoration: BoxDecoration(
+                  color: Color(0xff5A0095),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(32),
+                    bottomRight: Radius.circular(32),
+                  )),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text('Bloody Teor',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600)),
+            const SizedBox(
+              height: 25,
+            ),
+            Stack(
+              children: [
+                 Center(
+                   child: ImageFiltered(
+                        imageFilter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+                        child: Opacity(
+                          opacity: 0.5,
+                          child: Container(
+                            width: size.width,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Color(0xff5A0095),
+                                  Color(0xffAE52FF),
+                                  Color(0xff4C65F6),
+                                  Color(0xff4C65F6),
+                                  Color(0xff3981E9),
+                                  Color(0xffAE52FF),
+                                  Color(0xff5A0095)
+                                ]   )),
+                          ),
+                        ),
+                      ),
+                   
+                 ),
+                Center(
+                  child: ImageFiltered(
+                    imageFilter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 2),
+                    child: Container(
+                      height:65,
+                      width: 3,
+                      decoration: BoxDecoration(
+                        color: Color(0xffBBF1ED)
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height:50,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Icon(CupertinoIcons.bluetooth, color: Colors.white, size: 32,),
+                 Icon(CupertinoIcons.pause, color: Colors.white, size: 32,),
+                  Icon(CupertinoIcons.chevron_right_2, color: Colors.white, size: 32,),
+              ],
+            ),
+            const SizedBox(height:50,),
+           Container(
+                height: 4,
+                width:150,
+                decoration: BoxDecoration(
+                  color: Colors.white
+                )
+              ),
+          ],
+        ),
+      );
   }
 }

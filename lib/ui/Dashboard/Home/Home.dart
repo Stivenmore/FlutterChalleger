@@ -33,37 +33,7 @@ class _HomeState extends State<Home> {
                 Container(
                   width: size.width,
                   height: 191,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: artists.length,
-                      itemBuilder: (_, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 140,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        image: AssetImage(artists[index].path),
-                                        fit: BoxFit.cover)),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                artists[index].name,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.grey),
-                              )
-                            ],
-                          ),
-                        );
-                      }),
+                  child: ListHorizontal(),
                 ),
                 const SizedBox(
                   height: 25,
@@ -75,64 +45,119 @@ class _HomeState extends State<Home> {
                     style: TextStyle(fontSize: 21, fontWeight: FontWeight.w700),
                   ),
                 ),
-                SizedBox(
-                  height: 1100,
-                  width: size.width,
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemCount: albums.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, left: 16, right: 16, bottom: 8),
-                          child: Center(
-                            child: Stack(
-                              children: [
-                                 Container(
-                                    height: 350,
-                                    width: size.width ,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(42),
-                                        image: DecorationImage(
-                                            image:
-                                                AssetImage(albums[index].image),
-                                            fit: BoxFit.cover)),
-                                  ),
-                               
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 30),
-                                  child: Center(
-                                    child: Column(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundImage: AssetImage(
-                                              albums[index].imageartisc),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(albums[index].name,
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              color: Colors.white,
-                                            ))
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
-                )
+                ListVertical(size: size)
               ],
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+class ListVertical extends StatelessWidget {
+  const ListVertical({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 1100,
+      width: size.width,
+      child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          itemCount: albums.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(
+                  top: 8, left: 16, right: 16, bottom: 8),
+              child: Center(
+                child: Stack(
+                  children: [
+                     Container(
+                        height: 350,
+                        width: size.width ,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(42),
+                            image: DecorationImage(
+                                image:
+                                    AssetImage(albums[index].image),
+                                fit: BoxFit.cover)),
+                      ),
+                   
+                    Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 30),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: AssetImage(
+                                  albums[index].imageartisc),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(albums[index].name,
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          }),
+    );
+  }
+}
+
+class ListHorizontal extends StatelessWidget {
+  const ListHorizontal({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: artists.length,
+        itemBuilder: (_, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 140,
+                  width: 130,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: AssetImage(artists[index].path),
+                          fit: BoxFit.cover)),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  artists[index].name,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey),
+                )
+              ],
+            ),
+          );
+        });
   }
 }
